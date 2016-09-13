@@ -61,8 +61,8 @@ module Sophos
             end
             false
           else
-            # if the certificate is valid and no finderprint is passed we accept
-            # the certificate
+            # if the certificate is valid and no fingerprint is passed the
+            # certificate chain result is determining
             preverify_ok
           end
         end
@@ -106,7 +106,8 @@ module Sophos
           ref = type._ref
           type = type._type
         else
-          raise ArgumentError, 'type must be a string, hash or object with'
+          raise ArgumentError, 'type must be a string, hash or object with ' \
+            ' _ref and _type defined'
         end
       end
 
@@ -196,7 +197,9 @@ module Sophos
       body = nil
 
       if response.body && response.body != ''
-        body = JSON.parse('{"body":' + response.body + '}')['body']
+        # rubys JSON parse is unable to parse scalar values (number, string,
+        # bool, ...) directly, because of this it needs to be wrapped before
+        body = JSON.parse('[' + response.body + ']').first
         if body.is_a?(Array) && body.any? && body.first.is_a?(Hash)
           body = body.map { |i| OpenStruct.new(i) }
         elsif body.is_a? Hash

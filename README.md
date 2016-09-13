@@ -1,28 +1,28 @@
-# SOPHOS Chef Cockbook
+# Sophos Chef Cookbook
 
 ## SG (Security Gateway - UTM 9)
 
-The SG recipies use the UTM 9 REST API to automate provisioning of the UTM.
-Basic requirement is, that the basic setup has been done before (will create
-the admin account etc.).
+The SG recipes use the UTM 9 REST API to automate provisioning of the UTM.
+Please make sure the basic setup is performed beforehand as it creates the
+required admin account.
 
 To find out how to configure the UTM 9 use the `confd-watch.plx -v` command.
-It will indicate create objects (o+), changed objects (oc), changed nodes (nc)
-and object deletions (o-). Use the output to generate the recipes for your UTM
+It will indicate created objects (o+), changed objects (oc), changed nodes (nc)
+and deleted objects (o-). Use the output to generate the recipes for your UTM
 instances:
 
-Note: in most cases you can omit empty values like: `Empty SCALAR`,
-`Empty ARRAY`, etc. Use `true` and `false` for `1` and `0` if its a status field.
+Note: In most cases you can omit empty values like: `Empty SCALAR`,
+`Empty ARRAY`, etc. Use `true` and `false` for `1` and `0` if it is a status
+field.
 
 ### Configuration
 
-To configure the utm, that will be configured with the chef recipies, one can
-use the following attributes:
+The following attributes can be used to configure the UTM with Chef recipes:
 
 #### URL
 
-The sophos sg url is the url to the UTM to configure, embed the username
-and password into the url. Be sure to use the `https` scheme, the correct
+The Sophos SG URL is the URL to the UTM to configure, embed the username
+and password into the URL. Be sure to use the `https` scheme, the correct
 port (`4444`) and api path (`/api`).
 
     default['sophos']['sg']['url'] = 'https://admin:passwd@example.org:4444/api'
@@ -31,8 +31,8 @@ port (`4444`) and api path (`/api`).
 
 In case you use the default self signed certificate of your UTM, and you don't
 want to install an official / or install it to your trusted ones, you can choose
-to use **Public key fingerprinting**. To find out the fingerprint of your utm
-use openssl:
+to use **Public key fingerprinting**. The fingerprint of your UTM SSL
+certificate can be retrieved using the openssl tool:
 
     openssl s_client -connect <your-ip-or-dns>:4444 < /dev/null 2>/dev/null |\
         openssl x509 -fingerprint -noout -in /dev/stdin
@@ -46,9 +46,9 @@ Then use the fingerprint in your configuration:
 ### Examples
 
 Here are some examples that where created using the output of the
-`confd-watch.plx -v` command. If further assitance on the datanmodel is needed,
-consult the REST API at `https://<your host>/api/` on your utm and inspect
-the different objects and nodes, the `POST` formular gives good inside in
+`confd-watch.plx -v` command. If further assitance on the data-model is needed,
+consult the REST API at `https://<your host>/api/` on your UTM and inspect
+the different objects and nodes, the `POST` form provides good insight in
 possible values.
 
 #### WEB Filtering
@@ -120,7 +120,7 @@ Chef:
 
 #### Packetfilter
 
-Allow HTTPS, SMTP, SSH from internal to mailserver:
+Allow HTTPS, SMTP and SSH from internal to mail server:
 
     sophos_sg_object 'network/host/REF_NetHosMailseInDe' do
       attributes name: 'Mailserver in DE',

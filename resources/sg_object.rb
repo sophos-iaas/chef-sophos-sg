@@ -53,13 +53,13 @@ action :create do
     type, ref = Sophos::Chef.split_path(path)
     Chef::Log.info "[SOPHOS] Creating object #{ref} (#{type})"
     if property_is_set?(:insert_to_node)
-      pos = insert_position == -1 ? '' : " #{insert_position}"
+      pos = insert_position == ANY_POSITION ? '' : " #{insert_position}"
       insert = "#{insert_to_node}#{pos}"
     end
     obj = utm.update_object(type, attributes.merge(_ref: ref), insert)
     if obj._ref != ref
       utm.destroy_object(obj)
-      raise ArgumentError, 'REF_ had invalid format only use [a-Z0-9]!'
+      raise ArgumentError, 'REF had invalid format, only use [a-Z0-9]!'
     end
   end
 end

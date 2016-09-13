@@ -29,7 +29,7 @@ port (`4444`) and api path (`/api`).
 
 #### Fingerprint (for SSL without valid certificate chain)
 
-In case you use the default self signed certificate of your UTM, and you don't
+In case you use the default self-signed certificate of your UTM, and you don't
 want to install an official / or install it to your trusted ones, you can choose
 to use **Public key fingerprinting**. The fingerprint of your UTM SSL
 certificate can be retrieved using the openssl tool:
@@ -82,7 +82,7 @@ Chef translation:
     end
 
 **Creating a domain regex (lowbird.com) to filter and start blocking
-unappropriate content:**
+inappropriate content:**
 
 `confd-watch.plx -v`:
 
@@ -187,7 +187,7 @@ Enable masquerading from the internal network on the wan interface:
 
 #### DNAT
 
-Redirect HTTP traffic fom Any to the Public Address to the Webserver:
+Redirect HTTP traffic from Any to the Public Address to the Webserver:
 
     sophos_sg_object 'network/host/REF_NetHosWebserver' do
       attributes name: 'Webserver',

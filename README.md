@@ -46,7 +46,7 @@ Then use the fingerprint in your configuration:
 ### Examples
 
 Here are some examples that where created using the output of the
-`confd-watch.plx -v` command. If further assitance on the data-model is needed,
+`confd-watch.plx -v` command. If further assistance on the data-model is needed,
 consult the REST API at `https://<your host>/api/` on your UTM and inspect
 the different objects and nodes, the `POST` form provides good insight in
 possible values.

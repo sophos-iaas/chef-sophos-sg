@@ -19,13 +19,22 @@ field.
 
 The following attributes can be used to configure the UTM with Chef recipes:
 
-#### URL
+#### URL and Authentication
 
 The Sophos SG URL is the URL to the UTM to configure, embed the username
 and password into the URL. Be sure to use the `https` scheme, the correct
 port (`4444`) and api path (`/api`).
 
     default['sophos']['sg']['url'] = 'https://admin:passwd@example.org:4444/api'
+
+In case your request is local you can connect unauthenticated by connecting to
+localhost on port 3001. In the case of unauthenticated access the scheme is plain `http`.
+
+    default['sophos']['sg']['url'] = 'http://localhost:3001/api'
+
+You are only allowed to connect to this port if your user account is a
+member of the group restapi. By default only root and loginuser are members
+of this group.
 
 #### Fingerprint (for SSL without valid certificate chain)
 

@@ -1,4 +1,4 @@
-default['sophos']['sg']['url'] = 'http://admin:pppp@localhost:3000/api'
+default['sophos']['sg']['url'] = 'https://admin:pppp@localhost:3000/api'
 
 # In case the SG is remote use https and provide the fingerprint of the
 # certificate  or have a certificate in your chain that verifies the utm

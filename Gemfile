@@ -1,16 +1,12 @@
 source 'https://rubygems.org'
 
+gem 'sophos-sg-rest'
+
 group :development do
   # Linting
-  gem 'foodcritic'
-  gem 'nokogiri', '1.6.1' # use old version with less dependecies
-
   gem 'cookstyle'
-end
+  gem 'foodcritic'
+  gem 'rake-foodcritic'
 
-group :test do
-  gem 'rspec'
-  gem 'rspec_junit_formatter'
-  gem 'simplecov'
-  gem 'simplecov-cobertura'
+  gem 'nokogiri', '1.6.7.1'
 end

@@ -2,18 +2,37 @@
 # See the LICENSE.txt file for details.
 # Authors: Vincent Landgraf
 
+require 'sophos/sg/rest'
+
 module Sophos
+  class HTTPLogger
+    MAX_LINE = 1024
+
+    def initialize(logger)
+      @logger = logger
+      @buffer = ''
+    end
+
+    def <<(msg)
+      @buffer << msg
+      while (index = @buffer.index("\n"))
+        line = @buffer[0..(index - 1)]
+        if line.size < MAX_LINE
+          @logger.info "[SOPHOS] HTTP: #{line}"
+        else
+          @logger.info "[SOPHOS] HTTP: #{line[0..MAX_LINE]} ... (cut after #{MAX_LINE})"
+        end
+        @buffer = @buffer[(index + 1)..-1]
+      end
+    end
+  end
+
   module Chef
     def self.client(node, log)
-      utm = Sophos::UTM9RestClient.new(node['sophos']['sg']['url'],
-              fingerprint: node['sophos']['sg']['fingerprint'])
-      logger = Object.new
-      logger.instance_variable_set('@log', log)
-      def logger.<<(msg)
-        return if msg.to_s.strip == ''
-        @log.info "[SOPHOS] HTTP: #{msg}"
-      end
-      utm.logger = logger
+      conf = node['sophos']['sg']
+      utm = Sophos::SG::REST::Client.new(conf['url'],
+                                         fingerprint: conf['fingerprint'])
+      utm.logger = HTTPLogger.new(log)
       utm
     end
 

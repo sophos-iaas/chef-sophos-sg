@@ -41,7 +41,7 @@ load_current_value do |desired|
       reduced_to_local_set[key] = server_hash[key]
     end
     attributes reduced_to_local_set
-  rescue Sophos::UTM9RestClient::Error => ex
+  rescue Sophos::SG::REST::Error => ex
     return current_value_does_not_exist! if ex.response.code.to_i == 404
     raise ex
   end

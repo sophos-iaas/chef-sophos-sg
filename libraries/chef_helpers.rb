@@ -2,8 +2,6 @@
 # See the LICENSE.txt file for details.
 # Authors: Vincent Landgraf
 
-require 'sophos/sg/rest'
-
 module Sophos
   class HTTPLogger
     MAX_LINE = 1024
@@ -29,6 +27,7 @@ module Sophos
 
   module Chef
     def self.client(node, log)
+      require 'sophos/sg/rest'
       conf = node['sophos']['sg']
       utm = Sophos::SG::REST::Client.new(conf['url'],
                                          fingerprint: conf['fingerprint'])

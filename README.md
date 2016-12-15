@@ -6,6 +6,8 @@ The SG recipes use the UTM 9 REST API to automate provisioning of the UTM.
 Please make sure the basic setup is performed beforehand as it creates the
 required admin account.
 
+**_This chef cookbook requires at least UTM 9.408 and newer_**
+
 To find out how to configure the UTM 9 use the `confd-watch.plx -v` command.
 It will indicate created objects (o+), changed objects (oc), changed nodes (nc)
 and deleted objects (o-). Use the output to generate the recipes for your UTM

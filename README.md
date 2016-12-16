@@ -28,9 +28,9 @@ port (`4444`) and api path (`/api`).
     default['sophos']['sg']['url'] = 'https://admin:passwd@example.org:4444/api'
 
 In case your request is executed locally on the UTM you can connect without
-authentication using port 3001. For unauthenticated access the scheme is plain `http`.
+authentication using port 3002. For unauthenticated access the scheme is plain `http`.
 
-    default['sophos']['sg']['url'] = 'http://localhost:3001/api'
+    default['sophos']['sg']['url'] = 'http://localhost:3002/api'
 
 You are only allowed to connect to this port if your user account is either root
 or loginuser. Other sytem users trying to connect to this port are blocked by

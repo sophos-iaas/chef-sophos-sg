@@ -8,7 +8,7 @@ maintainer_email 'sophos-iaas-oss@sophos.com'
 license 'MIT, SOPHOS proprietary'
 description 'Configuration of SOPHOS UTM Appliances'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version '1.0.2'
+version '1.0.3'
 gem 'sophos-sg-rest', '~> 0.1'
 
 recipe 'sophos::sg', 'Configuration of SOPHOS UTM SG Appliances (UTM9)'
